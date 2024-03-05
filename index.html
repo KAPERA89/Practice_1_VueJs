@@ -6,13 +6,29 @@
     <title>Document</title>
     <script src="https://unpkg.com/vue@3.0.2"></script>
     <style>
-        .box{
-            padding: 100px 0;
-            width: 400px;
-            text-align: center;
-            background: #ddd;
-            margin: 20px;
-            display: inline-block;
+        body{
+            background: #eee;
+            max-width: 960px;
+            margin: 20px auto;
+        }
+        p, ul{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style-type: none;
+            background: #fff;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        li.fav{
+            background: #ff9ed2;
+            color: white;
+
         }
     </style>
 </head>
@@ -23,9 +39,29 @@
 
         <div v-if="show">
             <p>{{title}} - {{age}}</p> 
+
+            <ul v-for="b in books" >  <!-- ila kant class fav true applique 3liha had css-->
+                <li :class="{fav: b.isFav}" @click="(changeFav(b))">
+                    <img style="height: 150px ;width: 200px;object-fit: cover;" :src="b.image" >
+                    <p style="font-weight: bold;" >{{b.title}} </p>
+                    <p>{{b.author}}</p>
+                </li>
+            </ul>
+
+            <br>
+            <br>
+            <br>
+            <ul v-for="b in filteredBooks" >  <!-- ila kant class fav true applique 3liha had css-->
+                <li :class="{fav: b.isFav}" @click="(changeFav(b))">
+                    <img style="height: 150px ;width: 200px;object-fit: cover;" :src="b.image" >
+                    <p style="font-weight: bold;" >{{b.title}} </p>
+                    <p>{{b.author}}</p>
+                </li>
+            </ul>
         </div>
 
-         <!-- b7alha b7l v-if ila kant true ghatban ila false maghatbanch-->
+
+        <!-- b7alha b7l v-if ila kant true ghatban ila false maghatbanch-->
         <!-- v-if kat7ayad objet mn DOM ila kan false ama v-show katkhdem b css ila makanch kadir lih display:none 
             ila kan displa:block-->
 
@@ -45,11 +81,22 @@
         </button>
 
         <br>
+        <br>
+
+
+        <!-- v-bind = :  -->
+        <!-- <a v-bind:href="url">Tap the URL</a> -->
+        <a :href="url">Tap the URL</a>
+
+
+        <br>
+
         <!--Mouse Events-->
         <div class="box" @mouseover="handleEvent">mouseover (enter)</div>
         <div class="box" @mouseleave="handleEventleave">mouseleave</div>
         <div class="box" @dblclick="handleDoubleClick">double click</div>
         <div class="box" @mousemove="handlemove">position - {{x}} , {{y}}</div>
+
 
 
     </div>
